@@ -2,7 +2,7 @@ arch ?= x86_64
 kernel := build/kernel-$(arch).bin
 iso := build/os-$(arch).iso
 target ?= $(arch)-unknown-linux-gnu
-rust_os := target/$(target)/debug/librust_os.a
+rust_os := target/$(target)/debug/librusty_os.a
 
 linker_script := src/arch/$(arch)/linker.ld
 grub_cfg := src/arch/$(arch)/grub.cfg
@@ -34,7 +34,7 @@ $(kernel): cargo $(rust_os) $(assembly_object_files) $(linker_script)
 		$(assembly_object_files) $(rust_os)
 
 cargo:
-       @cargo build --target $(target)
+	@cargo build --target $(target)
 
 # compile assembly files
 build/arch/$(arch)/%.o: src/arch/$(arch)/%.asm
